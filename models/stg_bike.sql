@@ -1,3 +1,7 @@
+
+{{ config(materialized='table') }}
+
+
 WITH BIKE AS (
 
     select
@@ -15,11 +19,7 @@ WITH BIKE AS (
     MEMBER_CSUAL
 
     from {{ source('demo', 'bike') }}
-
-    where RIDE_ID not in ('"bikeid"', '""bikeid""') 
-    and STARTED_AT not in ('"starttime"', 'starttime', '""starttime""')
+    where RIDE_ID not like '%id%' and  STARTED_AT not like 'started%' and  ENDED_AT not like 'ended%' 
 )
 
-select
-*
-from BIKE
+select * from BIKE

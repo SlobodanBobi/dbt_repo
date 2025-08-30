@@ -1,3 +1,6 @@
+
+{{ config(materialized='table') }}
+
 WITH BIKE as (
 
         select
@@ -8,9 +11,7 @@ WITH BIKE as (
         START_LNG as start_station_lng
 
         from {{ ref('stg_bike') }}
-        where RIDE_ID != '"bikeid"'
+        where lower(RIDE_ID) not like  '%bike%'
 
 )
-select
-*
-from BIKE
+select * from BIKE
