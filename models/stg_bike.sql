@@ -18,8 +18,8 @@ WITH BIKE AS (
     END_LNG,
     MEMBER_CSUAL
 
-    from {{ source('demo', 'bike') }}
-    where RIDE_ID not like '%id%' and  STARTED_AT not like 'started%' and  ENDED_AT not like 'ended%' 
+    from {{ source('demo', 'bike_2') }}
+    where lower(RIDE_ID) not like '%id%' and  STARTED_AT not like 'start%' and  ENDED_AT not like 'ended%' 
 )
 
 select * from BIKE
